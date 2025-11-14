@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.templatetags import static
+from django.templatetags.static import static
 
 # Create your models here.
 class Profile(models.Model):
@@ -19,8 +19,6 @@ class Profile(models.Model):
             return f"{self.first_name} {self.last_name}"
         elif self.first_name:
             return self.first_name
-        # elif self.last_name:
-        #     return self.last_name
         return self.user.username
 
     @property
@@ -29,5 +27,5 @@ class Profile(models.Model):
             avatar = self.image.url
         except:
             # default avatar
-            avatar = static('images/Default_pfp.jpg')
+            avatar = static('images/Default_pfp.svg')
         return avatar
