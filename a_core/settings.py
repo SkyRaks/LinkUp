@@ -37,6 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 'django_cleanup.apps.CleanupConfig',
+    # 'allauth',
+    # 'allauth.account',
+    # 'allauth.socialaccount',
+    # 'django_htmx',
+
     'a_home',
     'a_users',
 ]
@@ -69,6 +76,9 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'a_core.wsgi.application'
+
+# ASGI Configuration
+# ASGI_APPLICATION = 'a_core.asgi.application'
 
 
 # Database
@@ -124,6 +134,9 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [ BASE_DIR / 'static' ]
+
+MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
