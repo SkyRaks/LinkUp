@@ -16,10 +16,13 @@
           </button>
           <ul class="dropdown-menu dropdown-menu-dark">
             <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-            <li><a class="dropdown-item" href="{% url 'profile-edit' %}">Edit</a></li>
-            <li><a class="dropdown-item" href="#">Log out</a></li>
+            <li><a class="dropdown-item" href="{% url 'account_logout' %}">Log out</a></li>
           </ul>
         </li>
+        {% else %}
+<!--        <button type="button" class="btn btn-dark">Dark</button>-->
+        <a class="btn btn-dark" href="{% url 'account_login' %}" role="button">Login</a>
+        <a class="btn btn-dark" href="" role="button">Register</a>
         {% endif %}
       </ul>
     </div>

@@ -2,12 +2,14 @@
 {% block content %}
     <div class="max-w-lg mx-auto flex flex-col items-center pt-20 px-4">
      <div class="text-center">
-     <img class="rounded-circle object-cover  mb-4" src="{{ profile.avatar }}" width="50" height="50" />
+     <img class="rounded-circle object-cover mt-2 mb-4" src="{{ profile.avatar }}" width="50" height="50" />
          <h1>{{ profile.name }}</h1>
          <div class="text-gray-400 mb-2 -mt-3">{{ profile.username }}</div>
          {% if profile.info %}
-         <div class="mt-8 hyphens-auto">{{ profile.info }}</div>
+         <div class="mt-8 hyphens-auto bg-warning">{{ profile.info }}</div>
          {% endif %}
+         <a class="btn btn-primary m-2" href="{% url 'profile-edit' %}" role="button">Edit profile</a>
+         <a class="btn btn-primary m-2" href="" role="button">Account settings</a>
      </div>
     </div>
 {% endblock %}
