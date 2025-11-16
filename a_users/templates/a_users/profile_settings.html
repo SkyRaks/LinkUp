@@ -1,0 +1,71 @@
+{% extends 'layouts/box.html' %}
+
+{% block content %}
+<table class="w-full text-sm text-left text-gray-500">
+    <tbody>
+        <tr>
+            <th scope="row" class="pt-4 pb-1 text-base font-bold text-gray-900">
+                Email address
+            </th>
+            <td id="email-address" class="pt-4 pb-1 pl-4">
+                {% if user.email %}{{ user.email }}{% else %}No Email{% endif %}
+            </td>
+            <td class="pt-4 pb-1 pl-4">
+                    <a class="btn-secondary m-2 cursor-pointer"
+                       hx-get="{% url 'profile-emailchange' %}"
+                       hx-target="#email-address"
+                       hx-swap="innerHTML"
+                       role="button">
+                        Edit
+                    </a>
+            </td>
+        </tr>
+
+        <tr class="border-b">
+            <th scope="row" class="pb-4 font-medium text-gray-900">
+            </th>
+            <td class="pb-4 pl-4">
+                {% if user.emailaddress_set.first.verified %}
+                <span class="text-green-500">Verified</span>{% else %}
+                <span class="text-amber-500">Not verified</span>
+                {% endif %}
+            </td>
+            <td class="pb-4 pl-4">
+                    <a class="btn btn-primary m-2" href="" role="button">
+                        {% if not user.emailaddress_set.first.verified %}Verify{% endif %}
+                </a>
+            </td>
+        </tr>
+
+        <tr class="border-b">
+            <th scope="row" class="py-4 text-base font-bold text-gray-900">
+                Username
+            </th>
+            <td id="username" class="py-4 pl-4">
+                {{ user.username }}
+            </td>
+            <td class="py-4 pl-4">
+                <a id="username-edit" class="cursor-pointer font-medium text-blue-600 hover:underline"
+                    hx-get=""
+                    hx-target="#username"
+                    hx-swap="innerHTML" >
+                    Edit
+                </a>
+            </td>
+        </tr>
+
+        <tr class="">
+            <th scope="row" class="py-4 text-base font-bold text-gray-900">
+                Delete Account
+            </th>
+            <td class="py-4 pl-4">
+                Once deleted, account is gone. Forever.
+            </td>
+            <td class="py-4 pl-4">
+                    <a class="btn btn-danger  m-2" href="" role="button">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<a class="btn btn-primary m-2" href="{% url 'profile' %}" role="button">Cancel</a>
+{% endblock %}

@@ -9,7 +9,7 @@
          <div class="mt-8 hyphens-auto bg-warning">{{ profile.info }}</div>
          {% endif %}
          <a class="btn btn-primary m-2" href="{% url 'profile-edit' %}" role="button">Edit profile</a>
-         <a class="btn btn-primary m-2" href="" role="button">Account settings</a>
+         <a class="btn btn-primary m-2" href="{% url 'profile-settings' %}" role="button">Account settings</a>
      </div>
     </div>
 {% endblock %}
