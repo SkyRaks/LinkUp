@@ -1,12 +1,16 @@
 from django.contrib.auth.models import User
-from django.contrib.auth import get_user_model
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProflileForm, EmailForm
 
 # Create your views here.
-def profile_view(request):
-    profile = request.user.profile
+def profile_view(request, username=None):
+    if username:
+        profile = get_object_or_404(User, username=username).profile
+        print(username)
+        return render(request, 'a_users/profile.html', {'profile': profile})
+    else:
+        profile = request.user.profile
     return render(request, 'a_users/profile.html', {'profile': profile})
 
 @login_required

@@ -39,7 +39,10 @@
   {% for person in people %}
     <tr>
       <td>
-          {{ person.username }}
+          <a class="btn btn-dark" href="{% url 'profile' username=person.user.username %}" aria-expanded="false">
+            <img class="h-8 w-8 rounded-circle object-cover" src="{{ person.avatar }}" width="30" height="30"/>
+            {{ person.name }}
+          </a>
       </td>
     </tr>
 {% endfor %}

@@ -7,9 +7,15 @@
          <div class="text-gray-400 mb-2 -mt-3">{{ profile.username }}</div>
          {% if profile.info %}
          <div class="mt-8 hyphens-auto bg-warning">{{ profile.info }}</div>
+         {% else %}
+         <div class="mt-8 hyphens-auto bg-warning">No Bio</div>
          {% endif %}
+         {% if user != request.user %}
          <a class="btn btn-primary m-2" href="{% url 'profile-edit' %}" role="button">Edit profile</a>
          <a class="btn btn-primary m-2" href="{% url 'profile-settings' %}" role="button">Account settings</a>
+         {% else %}
+         <a class="btn btn-primary m-2" href="" role="button">send message</a>
+         {% endif %}
      </div>
     </div>
 {% endblock %}
