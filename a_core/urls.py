@@ -26,7 +26,8 @@ urlpatterns = [
     path('', include('a_home.urls')),
     path('profile/', include('a_users.urls')),
     path('accounts/', include('allauth.urls')),
-    path('profile/<str:username>/', profile_view, name='profile')
+    path('profile/<str:username>/', profile_view, name='profile'),
+    path('', include('a_chat.urls')),
 ]
 
 if settings.DEBUG:
