@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from .models import *
 
@@ -11,9 +11,11 @@ def chat_view(request, username):
         print('are u retarted?')
         return redirect('home')
 
-    other_user = User.objects.get(username=username)
+    # other_user = User.objects.get(username=username)
+    other_user = get_object_or_404(User, username=username)
     my_chatrooms = request.user.chat_groups.all()
     chatroom = None
+
 
     for room in my_chatrooms:
         if other_user in room.members.all():
@@ -27,13 +29,24 @@ def chat_view(request, username):
     chat_messages = chatroom.chat_messages.all()[:30]
 
     form = ChatMessageForm()
-    if request.method == 'POST':
+    # if this is post method
+    # method == 'POST'
+    if request.htmx:
         form = ChatMessageForm(request.POST)
         if form.is_valid():
             message = form.save(commit=False)
             message.author = request.user
             message.group = chatroom
             message.save()
-            return redirect('chat', username=username)
+            # return redirect('chat', username=username) this is for posts method
+            context = {
+                'message': message,
+                'user': request.user,
+                'other_user': other_user
+            }
+            return render(request, 'a_chat/partials/chat_message_partial.html', context=context)
 
-    return render(request, 'a_chat/chat.html', {'chat_messages': chat_messages, 'form': form})
+    return render(request, 'a_chat/chat.html',
+                  {'chat_messages': chat_messages,
+                   'form': form,
+                   'other_user': other_user})

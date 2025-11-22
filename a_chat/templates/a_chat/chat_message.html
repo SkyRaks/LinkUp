@@ -1,9 +1,13 @@
 {% if message.author == user %}
-<div class="me-2 mt-2 text-end bg-primary">
-        <h3>{{ message.body }}</h3>
-    </div>
+    <li class="flex justify-end">
+        <div class="me-2 mt-2 text-end bg-primary">
+            <h3>{{ message.body }}</h3>
+        </div>
+    </li>
 {% else %}
-    <div class="me-2 mt-2 text-start bg-warning">
-        <h3>{{ message.body }}</h3>
-    </div>
+    <li class="flex justify-start">
+        <div class="me-2 mt-2 text-start bg-warning">
+            <h3>{{ message.body }}</h3>
+        </div>
+    </li>
 {% endif %}
