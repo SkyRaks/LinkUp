@@ -4,14 +4,28 @@
 <h1>
     this will be my chat page
 </h1>
-<div>
-    {% for message in chat_messages reversed %}
-    {% include 'a_chat/chat_message.html' %}
-    {% endfor %}
-    <form method="post">
-    {{ form }}
+<div class="bg-secondary border rounded">
+    <div id="chat_container" style="height: 400px; overflow-y: auto; padding: 10px;">
+        <ul id="chat_message">
+            {% for message in chat_messages reversed %}
+            {% include 'a_chat/chat_message.html' %}
+            {% endfor %}
+        </ul>
+    </div>
+    <form class="m-2" method="post">
+    {{ form.body }}
     {% csrf_token %}
-    <button type="submit">Submit</button>
     </form>
 </div>
+
+{%block javascript  %}
+<script>
+    function scrollToBottom() {
+        const container = getElementById('chat_container');
+        container.scrollTop = container.scrollHeight;
+    }
+    scrollToBottom()
+</script>
+{% endblock %}
+
 {% endblock %}

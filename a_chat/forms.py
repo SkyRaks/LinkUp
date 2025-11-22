@@ -7,5 +7,7 @@ class ChatMessageForm(ModelForm):
         model = ChatMessage
         fields = ['body']
         widgets = {
-            'body': forms.TextInput(attrs={'placeholder': 'add message', 'class': 'text-black', 'max_length': '300', 'autofocus': True})
-        }
+            'body': forms.TextInput(attrs={'placeholder': 'add message',
+                                           'class': 'form-control text-black',
+                                           'max_length': '300',
+                                           'autofocus': True})}

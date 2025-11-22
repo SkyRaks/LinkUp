@@ -1,9 +1,9 @@
 {% if message.author == user %}
-<div class="text-end bg-primary">
+<div class="me-2 mt-2 text-end bg-primary">
         <h3>{{ message.body }}</h3>
     </div>
 {% else %}
-    <div class="text-start bg-success">
+    <div class="me-2 mt-2 text-start bg-warning">
         <h3>{{ message.body }}</h3>
     </div>
 {% endif %}

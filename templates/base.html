@@ -15,7 +15,7 @@
 <body class="{% block class %}{% endblock %} bg-dark text-white">
 
 {% include 'includes/header.html' %}
-<div class="container text-center mt-4">
+<div class="container mt-4">
   <div class="row text-black gap-3">
     <div class="col bg-light">
         <h1>Column</h1>
@@ -23,11 +23,10 @@
     </div>
     <div class="col bg-light">
         {% block layout %}
-{% endblock %}
+        {% endblock %}
     </div>
     <div class="col bg-light">
       <h1>People you may know</h1>
-
         {% if user.is_authenticated %}
         <table class="table">
   <thead>
@@ -49,8 +48,6 @@
   </tbody>
 </table>
         {% endif %}
-
-
     </div>
   </div>
 </div>
