@@ -14,7 +14,7 @@
          <a class="btn btn-primary m-2" href="{% url 'profile-edit' %}" role="button">Edit profile</a>
          <a class="btn btn-primary m-2" href="{% url 'profile-settings' %}" role="button">Account settings</a>
          {% else %}
-         <a class="btn btn-primary m-2" href="{% url 'chat' %}" role="button">send message</a>
+         <a class="btn btn-primary m-2" href="{% url 'chat' profile.user.username %}" role="button">send message</a>
          {% endif %}
      </div>
     </div>

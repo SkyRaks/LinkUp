@@ -3,24 +3,27 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from .models import *
 
-def chat_view(request):
-    return render(request, 'a_chat/chat.html')
 # Create your views here.
 @login_required
-def get_or_create_chatroom(request, username):
+def chat_view(request, username):
     if request.user.username == username:
         print('are u retarted?')
         return redirect('home')
 
     other_user = User.objects.get(username=username)
-    my_chatrooms = request.user.chatgroup.all()
+    my_chatrooms = request.user.chat_groups.all()
 
-    # if my_chatrooms.exists():
-    for chatroom in my_chatrooms:
-        if other_user in chatroom.members.all():
-            chatroom = chatroom
+    chatroom = None
+
+    for room in my_chatrooms:
+        if other_user in room.members.all():
+            chatroom = room
             break
-        else:
-            chatroom = ChatGroup.objects.create()
-            chatroom.members.add(other_user, request.user)
-    return redirect('chatroom', chatroom.chat_name)
+
+    if chatroom == None:
+        chatroom = ChatGroup.objects.create()
+        chatroom.members.add(other_user, request.user)
+
+    chat_messages = chatroom.chat_messages.all()[:30]
+
+    return render(request, 'a_chat/chat.html', {'chat_messages': chat_messages})

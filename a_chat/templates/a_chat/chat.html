@@ -5,6 +5,8 @@
     this will be my chat page
 </h1>
 <div>
+    {% for message in chat_messages reversed %}
     {% include 'a_chat/chat_message.html' %}
+    {% endfor %}
 </div>
 {% endblock %}
