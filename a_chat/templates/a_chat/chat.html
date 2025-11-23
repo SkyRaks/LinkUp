@@ -6,19 +6,21 @@
 </h1>
 <div class="bg-secondary border rounded">
     <div id="chat_container" style="height: 400px; overflow-y: auto; padding: 10px;">
-        <ul id="chat_messages">
+        <ul id="chat_messages" ws-receive>
             {% for message in chat_messages reversed %}
             {% include 'a_chat/chat_message.html' %}
             {% endfor %}
         </ul>
     </div>
     <form id="chat_message_form" class="m-2"
-            hx-post="{% url 'chat' other_user.username %}"
-            hx-target="#chat_messages"
-            hx-swap="beforeend">
+          hx-ext="ws"
+          ws-connect="/ws/chatroom/{{ chatroom.id }}/"
+          ws-send
+          _="on htmx:wsAfterSend reset() me">
+
 <!--instead of post method there will be htmx stuff-->
-    {{ form.body }}
     {% csrf_token %}
+    {{ form.body }}
     </form>
 </div>
 
