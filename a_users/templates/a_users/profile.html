@@ -5,6 +5,22 @@
      <img class="rounded-circle object-cover mt-2 mb-4" src="{{ profile.avatar }}" width="50" height="50" />
          <h1>{{ profile.name }}</h1>
          <div class="text-gray-400 mb-2 -mt-3">{{ profile.username }}</div>
+         <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Posts</th>
+              <th scope="col">Folowers</th>
+              <th scope="col">Folowing</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0</td>
+              <td>0</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
          {% if profile.info %}
          <div class="mt-8 hyphens-auto bg-warning">{{ profile.info }}</div>
          {% else %}
@@ -14,8 +30,10 @@
          <a class="btn btn-primary m-2" href="{% url 'profile-edit' %}" role="button">Edit profile</a>
          <a class="btn btn-primary m-2" href="{% url 'profile-settings' %}" role="button">Account settings</a>
          {% else %}
+         <a class="btn btn-outline-primary m-2" href="{% url 'folow' profile.user.username %}" role="button">subscribe</a>
          <a class="btn btn-primary m-2" href="{% url 'chat' profile.user.username %}" role="button">send message</a>
          {% endif %}
      </div>
     </div>
 {% endblock %}
+

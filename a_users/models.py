@@ -27,3 +27,10 @@ class Profile(models.Model):
             return self.image.url
         return f'{settings.STATIC_URL}images/avatar.svg'
 
+class Folowers(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # folowers = models.CharField(max_length=100)
+    folowers = models.ManyToManyField(User, related_name='subscribers', blank=True)
+
+    def __str__(self):
+        return str(self.user)

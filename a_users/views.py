@@ -2,16 +2,26 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import ProflileForm, EmailForm
+from .models import *
 
 # Create your views here.
 def profile_view(request, username=None):
     if username:
         profile = get_object_or_404(User, username=username).profile
-        print(username)
+        print(f"this is profile of: {username}")
         return render(request, 'a_users/profile.html', {'profile': profile})
     else:
         profile = request.user.profile
     return render(request, 'a_users/profile.html', {'profile': profile})
+
+def folow_view(request, username):
+    new_folower = request.user.username
+    thisUser = get_object_or_404(User, username=username)
+    print(f"new folower: {new_folower}")
+    print(f"this user: {thisUser}")
+    # subs = Folowers.objects.create(user=thisUser, folowers=new_folower)
+    # subs.save()
+    return redirect(f"/profile/{thisUser.profile}/")
 
 @login_required
 def profile_edit_view(request):
