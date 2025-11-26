@@ -10,6 +10,8 @@ class Profile(models.Model):
     info = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='avatars/', null=True, blank=True)
     folowers = models.ManyToManyField(User, related_name='subscribers', blank=True)
+    folowing = models.ManyToManyField(User, related_name='subscriptions', blank=True)
+
 
     def __str__(self):
         return str(self.user)

@@ -18,12 +18,18 @@
               <td>0</td>
               <td>
                   {% if profile.folowers %}
-                  {{ profile.folowers.count }}
+                    {{ profile.folowers.count }}
                   {% else %}
-                  0
+                    0
                   {% endif %}
               </td>
-              <td>0</td>
+              <td>
+                  {% if profile.folowing %}
+                    {{ profile.folowing.count }}
+                  {% else %}
+                    0
+                  {% endif %}
+              </td>
             </tr>
           </tbody>
         </table>
