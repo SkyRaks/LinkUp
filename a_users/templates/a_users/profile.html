@@ -16,7 +16,13 @@
           <tbody>
             <tr>
               <td>0</td>
-              <td>0</td>
+              <td>
+                  {% if profile.folowers %}
+                  {{ profile.folowers.count }}
+                  {% else %}
+                  0
+                  {% endif %}
+              </td>
               <td>0</td>
             </tr>
           </tbody>

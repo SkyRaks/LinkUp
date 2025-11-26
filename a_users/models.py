@@ -9,6 +9,7 @@ class Profile(models.Model):
     last_name = models.CharField(max_length=50, null=True, blank=True)
     info = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='avatars/', null=True, blank=True)
+    folowers = models.ManyToManyField(User, related_name='subscribers', blank=True)
 
     def __str__(self):
         return str(self.user)
@@ -27,10 +28,10 @@ class Profile(models.Model):
             return self.image.url
         return f'{settings.STATIC_URL}images/avatar.svg'
 
-class Folowers(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    # folowers = models.CharField(max_length=100)
-    folowers = models.ManyToManyField(User, related_name='subscribers', blank=True)
-
-    def __str__(self):
-        return str(self.user)
+# class Folowers(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE)
+#     folowers = models.CharField(max_length=100)
+#     folowers = models.ManyToManyField(User, related_name='subscribers', blank=True)
+#
+#     def __str__(self):
+#         return str(self.user)

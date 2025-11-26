@@ -15,13 +15,19 @@ def profile_view(request, username=None):
     return render(request, 'a_users/profile.html', {'profile': profile})
 
 def folow_view(request, username):
-    new_folower = request.user.username
-    thisUser = get_object_or_404(User, username=username)
-    print(f"new folower: {new_folower}")
-    print(f"this user: {thisUser}")
-    # subs = Folowers.objects.create(user=thisUser, folowers=new_folower)
-    # subs.save()
-    return redirect(f"/profile/{thisUser.profile}/")
+    new_folower = request.user
+    thisUser = get_object_or_404(User, username=username).profile
+
+    # folowers on thisUser
+    if new_folower in thisUser.folowers.all():
+        thisUser.folowers.remove(new_folower)
+        return redirect(f"/profile/{thisUser}/")
+
+    thisUser.folowers.add(new_folower)
+
+    # folowings of new_folower
+
+    return redirect(f"/profile/{thisUser}/")
 
 @login_required
 def profile_edit_view(request):
