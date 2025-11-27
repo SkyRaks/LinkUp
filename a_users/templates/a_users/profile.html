@@ -24,8 +24,8 @@
                   {% endif %}
               </td>
               <td>
-                  {% if profile.folowing %}
-                    {{ profile.folowing.count }}
+                  {% if profile.user.subscribers %}
+                    {{ profile.user.subscribers.count }}
                   {% else %}
                     0
                   {% endif %}

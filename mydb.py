@@ -14,3 +14,4 @@ cur = conn.cursor()
 cur.execute("CREATE DATABASE linkupdb;")
 
 print("db created!")
+# DON'T USE

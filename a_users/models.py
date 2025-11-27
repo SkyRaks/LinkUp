@@ -10,7 +10,6 @@ class Profile(models.Model):
     info = models.TextField(null=True, blank=True)
     image = models.ImageField(upload_to='avatars/', null=True, blank=True)
     folowers = models.ManyToManyField(User, related_name='subscribers', blank=True)
-    folowing = models.ManyToManyField(User, related_name='subscriptions', blank=True)
 
 
     def __str__(self):
@@ -30,10 +29,13 @@ class Profile(models.Model):
             return self.image.url
         return f'{settings.STATIC_URL}images/avatar.svg'
 
-# class Folowers(models.Model):
-#     user = models.ForeignKey(User, on_delete=models.CASCADE)
-#     folowers = models.CharField(max_length=100)
-#     folowers = models.ManyToManyField(User, related_name='subscribers', blank=True)
-#
-#     def __str__(self):
-#         return str(self.user)
+class Post(models.Model):
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='posts_images/', null=True, blank=False) #required
+    likes = models.ManyToManyField(User, related_name='like', blank=True)
+    caption = models.TextField(null=True, blank=True)
+    created = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.author.username} post {self.created}"
+

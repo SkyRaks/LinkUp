@@ -18,17 +18,13 @@ def folow_view(request, username):
     new_folower = request.user
     thisUser = get_object_or_404(User, username=username)
 
-    # folowers on thisUser
+    # this user's folowers
     if new_folower in thisUser.profile.folowers.all():
         thisUser.profile.folowers.remove(new_folower)
-        # new_folower.profile.folowing.remove(thisUser.profile)
-        new_folower.profile.folowing.remove(thisUser)
         return redirect(f"/profile/{thisUser.profile}/")
 
+    # user who folows the other one^
     thisUser.profile.folowers.add(new_folower)
-    new_folower.profile.folowing.add(thisUser)
-
-    # folowings of new_folower
 
     return redirect(f"/profile/{thisUser}/")
 
