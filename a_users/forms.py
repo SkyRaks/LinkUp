@@ -6,7 +6,7 @@ from .models import Profile
 class ProflileForm(ModelForm):
     class Meta:
         model = Profile
-        exclude = ['user']
+        exclude = ['user', 'folowers']
         widgets = {
             'image': forms.FileInput(),
             'first_name': forms.TextInput(attrs={'placeholder': 'Add first name'}),

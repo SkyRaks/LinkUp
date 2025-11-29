@@ -39,3 +39,8 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.author.username} post {self.created}"
 
+    def post_image(self):
+        if self.image:
+            return self.image.url
+        return f'{settings.STATIC_URL}images/avatar.svg'
+

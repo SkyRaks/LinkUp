@@ -1,0 +1,11 @@
+{% extends 'layouts/box.html' %}
+
+{% block content %}
+this is create post form page
+<form id="post_form" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit</button>
+</form>
+<a class="btn btn-primary m-2" href="{% url 'home' %}" role="button">Cancel</a>
+{% endblock %}
