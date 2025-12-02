@@ -32,7 +32,7 @@ class Profile(models.Model):
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='posts_images/', null=True, blank=False) #required
-    likes = models.ManyToManyField(User, related_name='like', blank=True)
+    likes = models.ManyToManyField(User, related_name='likes', blank=True)
     caption = models.TextField(null=True, blank=True)
     created = models.DateField(auto_now_add=True)
 

@@ -22,3 +22,15 @@ def create_post(request):
     else:
         form = PostForm
     return render(request, 'a_home/create_post.html', {'form': form})
+
+def like_post(request, author):
+    new_like = request.user
+    this_user = get_object_or_404(User, username=author)
+    this_posts = get_object_or_404(Post, author=this_user)
+
+    this_posts.likes.add(new_like)
+
+    return redirect('home')
+
+
+

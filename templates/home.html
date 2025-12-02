@@ -22,7 +22,7 @@
           <img src="{{ post.post_image }}" class="card-img-top" alt="..." width="200" height="200"/>
           <div class="card-body">
             <p class="card-text">{{ post.caption }}</p>
-            <a href="#" class="btn btn-primary">Like(not working)</a>
+            <a href="{% url 'like-post' post.author post.created %}" class="btn btn-primary">Like(not working)</a>
           </div>
         </div>
     {% endfor %}
