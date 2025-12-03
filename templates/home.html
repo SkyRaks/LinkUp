@@ -12,19 +12,28 @@
 
     <br/>
 
-    {% for post in post_feed reversed %}
-        <div class="card mb-3 mx-auto" style="width: 20rem;">
-            <a class="btn btn-dark" href="{% url 'profile' username=post.author.username %}" aria-expanded="false">
-                <img class="h-8 w-8 rounded-circle object-cover" src="{{ post.author.profile.avatar }}" width="30" height="30"/>
-                {{ post.author }}
-            </a>
-            {{ post.created }}
-          <img src="{{ post.post_image }}" class="card-img-top" alt="..." width="200" height="200"/>
-          <div class="card-body">
-            <p class="card-text">{{ post.caption }}</p>
-            <a href="{% url 'like-post' post.author post.created %}" class="btn btn-primary">Like(not working)</a>
-          </div>
-        </div>
-    {% endfor %}
+    {% if post_feed %}
+        {% for post in post_feed reversed %}
+            <div class="card mb-3 mx-auto" style="width: 20rem;">
+                <a class="btn btn-dark" href="{% url 'profile' username=post.author.username %}" aria-expanded="false">
+                    <img class="h-8 w-8 rounded-circle object-cover" src="{{ post.author.profile.avatar }}" width="30" height="30"/>
+                    {{ post.author }}
+                </a>
+                {{ post.created }}
+              <img src="{{ post.post_image }}" class="card-img-top" alt="..." width="200" height="200"/>
+              <div class="card-body">
+                <p class="card-text">{{ post.caption }}</p>
+                <a href="{% url 'like-post' post.id %}" class="btn btn-primary">Like
+                    {% if post.likes %}
+                        {{ post.likes.count }}
+                    {% else %}
+                    {% endif %}
+                </a>
+              </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        there is no posts
+    {% endif %}
 </div>
 {% endblock %}

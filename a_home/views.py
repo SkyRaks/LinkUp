@@ -9,7 +9,7 @@ def home_view(request):
         post_feed = Post.objects.all()
         return render(request, 'home.html', {'post_feed': post_feed})
     else:
-        return redirect(request, 'home')
+        return render(request, 'home.html')
 
 def create_post(request):
     if request.method == 'POST':
@@ -23,13 +23,15 @@ def create_post(request):
         form = PostForm
     return render(request, 'a_home/create_post.html', {'form': form})
 
-def like_post(request, author):
+def like_post(request, post_id):
     new_like = request.user
-    this_user = get_object_or_404(User, username=author)
-    this_posts = get_object_or_404(Post, author=this_user)
-
-    this_posts.likes.add(new_like)
-
+    this_post = get_object_or_404(Post, id=post_id)
+    if new_like in this_post.likes.all():
+        this_post.likes.remove(new_like)
+        return redirect('home')
+    else:
+        this_post.likes.add(new_like)
+        return redirect('home')
     return redirect('home')
 
 

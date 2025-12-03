@@ -1,3 +1,4 @@
+import shortuuid
 from django.conf import settings
 from django.db import models
 from django.contrib.auth.models import User
@@ -34,7 +35,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='posts_images/', null=True, blank=False) #required
     likes = models.ManyToManyField(User, related_name='likes', blank=True)
     caption = models.TextField(null=True, blank=True)
-    created = models.DateField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.author.username} post {self.created}"
