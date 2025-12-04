@@ -16,6 +16,11 @@
           <tbody>
             <tr>
               <td>
+                  {% if post_count %}
+                    {{ post_count }}
+                  {% else %}
+                    0
+                  {% endif %}
               </td>
               <td>
                   {% if profile.folowers %}
