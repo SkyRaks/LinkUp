@@ -15,9 +15,9 @@
 <body class="{% block class %}{% endblock %} bg-dark text-white">
 
 {% include 'includes/header.html' %}
-<div class="container mt-4">
+<div class="container mt-4 mb-3">
   <div class="row text-black gap-3">
-    <div class="col bg-light">
+    <div class="col-3 bg-secondary rounded-4">
         <h1>Folowers</h1>
 
         <table class="table">
@@ -34,22 +34,21 @@
       </td>
     </tr>
   </tbody>
-
 </table>
-
     </div>
-    <div class="col bg-light">
+
+
+    <div class="col-6 bg-secondary rounded-4 ">
         {% block layout %}
         {% endblock %}
     </div>
-    <div class="col bg-light">
+
+
+    <div class="col bg-secondary rounded-4">
       <h1>People you may know</h1>
         {% if user.is_authenticated %}
         <table class="table">
   <thead>
-<!--    <tr>-->
-<!--      <th scope="col">name</th>-->
-<!--    </tr>-->
   </thead>
   <tbody>
   {% for person in people %}

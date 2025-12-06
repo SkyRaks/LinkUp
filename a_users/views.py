@@ -6,12 +6,9 @@ from .models import *
 
 # Create your views here.
 def profile_view(request, username=None):
-    profile = None
-    post_count = None
     if username:
         profile = get_object_or_404(User, username=username).profile
         post_count = Post.objects.filter(author=profile.user).count()
-        # return render(request, 'a_users/profile.html', {'profile': profile, 'post_count': post_count})
     else:
         profile = request.user.profile
         post_count = Post.objects.filter(author=request.user).count()

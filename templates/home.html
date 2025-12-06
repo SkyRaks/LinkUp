@@ -3,7 +3,7 @@
 {% block content %}
 <div class="max-w-4xl mx-auto px-8 py-24">
 
-    <div class="d-grid gap-2 col-11 mx-auto mt-3">
+    <div class="d-grid gap-2 col-10 mx-auto mt-3">
       <a class="btn btn-primary" type="button" href="{% url 'create-post' %}">
           <img class="h-8 w-8 rounded-circle object-cover" src="{{ request.user.profile.avatar }}" width="30" height="30"/>
             What's on your mind?
@@ -14,21 +14,22 @@
 
     {% if post_feed %}
         {% for post in post_feed reversed %}
-            <div class="card mb-3 mx-auto" style="width: 20rem;">
-                <a class="btn btn-dark" href="{% url 'profile' username=post.author.username %}" aria-expanded="false">
+            <div class="bg-dark text-white card mb-3 mx-auto" style="width: 35rem;">
+                <a class="btn btn-primary" href="{% url 'profile' username=post.author.username %}">
                     <img class="h-8 w-8 rounded-circle object-cover" src="{{ post.author.profile.avatar }}" width="30" height="30"/>
-                    {{ post.author }}
+                        <strong>@{{ post.author }}</strong>
                 </a>
                 {{ post.created }}
-              <img src="{{ post.post_image }}" class="card-img-top" alt="..." width="200" height="200"/>
+              <img src="{{ post.post_image }}" class="card-img-top" width="200"/>
               <div class="card-body">
                 <p class="card-text">{{ post.caption }}</p>
-                <a href="{% url 'like-post' post.id %}" class="btn btn-primary">Like
+                <a href="{% url 'like-post' post.id %}">
+                    <img src="/static/like.png" width="35" height="35">
+                </a>
                     {% if post.likes %}
                         {{ post.likes.count }}
                     {% else %}
                     {% endif %}
-                </a>
               </div>
             </div>
         {% endfor %}
