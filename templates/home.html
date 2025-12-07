@@ -1,40 +1,49 @@
 {% extends 'layouts/blank.html' %}
 
 {% block content %}
-<div class="max-w-4xl mx-auto px-8 py-24">
 
-    <div class="d-grid gap-2 col-10 mx-auto mt-3">
-      <a class="btn btn-primary" type="button" href="{% url 'create-post' %}">
-          <img class="h-8 w-8 rounded-circle object-cover" src="{{ request.user.profile.avatar }}" width="30" height="30"/>
-            What's on your mind?
-      </a>
-    </div>
+<div class="container mt-4 mb-3">
+    <div class="row text-black gap-3">
+        {% include 'includes/left_div.html' %}
+        <div class="col-6 bg-secondary rounded-4">
+            <div class="max-w-4xl mx-auto px-8 py-24">
 
-    <br/>
+                <div class="d-grid gap-2 col-10 mx-auto mt-3">
+                    <a class="btn btn-primary" type="button" href="{% url 'create-post' %}">
+                        <img class="h-8 w-8 rounded-circle object-cover" src="{{ request.user.profile.avatar }}" width="30" height="30"/>
+                            What's on your mind?
+                    </a>
+                </div>
+                <br/>
 
-    {% if post_feed %}
-        {% for post in post_feed reversed %}
-            <div class="bg-dark text-white card mb-3 mx-auto" style="width: 35rem;">
-                <a class="btn btn-primary" href="{% url 'profile' username=post.author.username %}">
-                    <img class="h-8 w-8 rounded-circle object-cover" src="{{ post.author.profile.avatar }}" width="30" height="30"/>
-                        <strong>@{{ post.author }}</strong>
-                </a>
-                {{ post.created }}
-              <img src="{{ post.post_image }}" class="card-img-top" width="200"/>
-              <div class="card-body">
-                <p class="card-text">{{ post.caption }}</p>
-                <a href="{% url 'like-post' post.id %}">
-                    <img src="/static/like.png" width="35" height="35">
-                </a>
-                    {% if post.likes %}
-                        {{ post.likes.count }}
-                    {% else %}
-                    {% endif %}
-              </div>
+                {% if post_feed %}
+                    {% for post in post_feed reversed %}
+                        <div class="bg-dark text-white card mb-3 mx-auto" style="width: 35rem;">
+                            <a class="btn btn-primary" href="{% url 'profile' username=post.author.username %}">
+                                <img class="h-8 w-8 rounded-circle object-cover" src="{{ post.author.profile.avatar }}" width="30" height="30"/>
+                                <strong>@{{ post.author }}</strong>
+                            </a>
+                            {{ post.created }}
+                            <img src="{{ post.post_image }}" class="card-img-top" width="200"/>
+                            <div class="card-body">
+                                <p class="card-text">{{ post.caption }}</p>
+                                <a href="{% url 'like-post' post.id %}">
+                                    <img src="/static/like.png" width="35" height="35">
+                                </a>
+                                {% if post.likes %}
+                                    {{ post.likes.count }}
+                                {% else %}
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    there is no posts
+                {% endif %}
             </div>
-        {% endfor %}
-    {% else %}
-        there is no posts
-    {% endif %}
+        </div>
+        {% include 'includes/right_div.html' %}
+    </div>
 </div>
+
 {% endblock %}
