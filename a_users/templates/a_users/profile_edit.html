@@ -3,7 +3,7 @@
 {% block content %}
 <a class="btn btn-close mt-2 mx-2 float-end" href="{% url 'profile' %}" role="button"></a>
 <div class="p-2 text-center mx-auto">
-    <h1>Edit Form</h1>
+    <h2>Edit Profile</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

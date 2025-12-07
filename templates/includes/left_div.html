@@ -1,18 +1,15 @@
 <div class="col bg-secondary rounded-4">
     <h1>Folowers</h1>
-
-    <table class="table">
-  <thead>
-  </thead>
-      <tbody>
-        <tr>
-          <td>
-              <a class="btn btn-dark" href="" aria-expanded="false">
-                <img class="h-8 w-8 rounded-circle object-cover" src="" width="30" height="30"/>
-                some folower
-              </a>
-          </td>
-        </tr>
-      </tbody>
-</table>
+    {% if user.is_authenticated %}
+      {% for folower in folowers %}
+    <div class="mx-auto m-2">
+        <a class="btn btn-dark" href="{% url 'profile' username=folower.username %}" aria-expanded="false">
+            <img class="h-8 w-8 rounded-circle object-cover" src="{{ folower.profile.avatar }}" width="30" height="30"/>
+            {{ folower.profile.name }}
+        </a>
+    </div>
+      {% endfor %}
+    {% else %}
+        Sign in to see your folowers
+    {% endif %}
 </div>

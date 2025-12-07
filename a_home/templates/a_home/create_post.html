@@ -1,11 +1,13 @@
 {% extends 'layouts/box.html' %}
 
 {% block content %}
-this is create post form page
-<form id="post_form" method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
-<a class="btn btn-primary m-2" href="{% url 'home' %}" role="button">Cancel</a>
+    <a class="btn btn-close mt-2 mx-2 float-end" href="{% url 'home' %}" role="button"></a>
+<div class="p-3 text-center mx-auto">
+    <h2>New Post</h2>
+    <form id="post_form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</div>
 {% endblock %}

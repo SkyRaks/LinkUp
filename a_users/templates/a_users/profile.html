@@ -1,10 +1,10 @@
 {% extends 'layouts/box.html' %}
 {% block content %}
+         <a class="btn btn-close mt-2 mx-2 float-end" href="{% url 'home' %}" role="button"></a>
     <div class="max-w-lg mx-auto flex flex-col items-center pt-20 px-4">
      <div class="text-center">
      <img class="rounded-circle object-cover mt-2 mb-4" src="{{ profile.avatar }}" width="50" height="50"/>
-         <a class="btn btn-close mt-2 mx-2 float-end" href="{% url 'home' %}" role="button"></a>
-         <h1>{{ profile.name }}</h1>
+         <h2>{{ profile.name }}</h2>
          <div class="text-gray-400 mb-2 -mt-3">{{ profile.username }}</div>
          <table class="table">
           <thead>

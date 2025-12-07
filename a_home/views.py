@@ -1,13 +1,16 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from a_users.models import *
 from .forms import *
 
 # Create your views here.
 
+@login_required
 def home_view(request):
     if Post.objects.all():
         post_feed = Post.objects.all()
-        return render(request, 'home.html', {'post_feed': post_feed})
+        folowers = request.user.profile.folowers.all()
+        return render(request, 'home.html', {'post_feed': post_feed, 'folowers': folowers})
     else:
         return render(request, 'home.html')
 
@@ -25,14 +28,14 @@ def create_post(request):
 
 def like_post(request, post_id):
     new_like = request.user
-    this_post = get_object_or_404(Post, id=post_id)
-    if new_like in this_post.likes.all():
-        this_post.likes.remove(new_like)
-        return redirect('home')
-    else:
-        this_post.likes.add(new_like)
-        return redirect('home')
-    return redirect('home')
+    post = get_object_or_404(Post, id=post_id)
 
+    if new_like in post.likes.all():
+        post.likes.remove(new_like)
+    else:
+        post.likes.add(new_like)
+
+    post.refresh_from_db()
+    return render(request, 'partials/like_button_partial.html', {'post': post})
 
 
