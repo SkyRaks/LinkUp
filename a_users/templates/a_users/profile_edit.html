@@ -1,13 +1,13 @@
 {% extends 'layouts/box.html' %}
 
 {% block content %}
-<h1>
-Edit Form
-</h1>
-<form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Submit</button>
-</form>
-<a class="btn btn-primary m-2" href="{% url 'profile' %}" role="button">Cancel</a>
+<a class="btn btn-close mt-2 mx-2 float-end" href="{% url 'profile' %}" role="button"></a>
+<div class="p-2 text-center mx-auto">
+    <h1>Edit Form</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+</div>
 {% endblock %}
