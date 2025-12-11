@@ -1,9 +1,9 @@
-{% extends 'layouts/blank.html' %}
+{% extends 'layouts/box.html' %}
 
 {% block content %}
-<h1>
-    this will be my chat page
-</h1>
+<h2 class="d-flex justify-content-center">
+    {{ other_user.profile.name }} and {{ request.user.profile.name }} chat
+</h2>
 <div class="bg-secondary border rounded">
     <div id="chat_container" style="height: 400px; overflow-y: auto; padding: 10px;">
         <ul id="chat_messages" ws-receive>
