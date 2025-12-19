@@ -2,14 +2,25 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from a_users.models import *
 from .forms import *
+from django.core.cache import cache
 
 # Create your views here.
 
 @login_required
 def home_view(request):
+    cache_key = "home_post_feed"
+
     if Post.objects.all():
-        post_feed = Post.objects.all()
+        post_feed = cache.get("home_post_feed")
+
+        if not post_feed:
+            print("loading posts")
+            post_feed = Post.objects.all()
+            cache.set(cache_key, post_feed, timeout=60)
+        else: #this else statement is check if this thing is working
+            print("cache hit!")
         folowers = request.user.profile.folowers.all()
+
         return render(request, 'home.html', {'post_feed': post_feed, 'folowers': folowers})
     else:
         return render(request, 'home.html')
