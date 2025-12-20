@@ -100,6 +100,17 @@ CHANNEL_LAYERS = {
     },
 }
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         # for production
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             # connection info for redis provider
+#             "hosts": ['redis://default:eKmKCLOhnGcoakGLxMstpvvjZRwHWfWN@redis.railway.internal:6379'],
+#         },
+#     },
+# }
+
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
