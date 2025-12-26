@@ -1,0 +1,10 @@
+Django
+channels
+daphne
+shortuuid
+channels-redis
+django-allauth
+django-cleanup
+django-htmx
+pillow
+psycopg[binary]
