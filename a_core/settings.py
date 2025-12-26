@@ -108,7 +108,7 @@ CHANNEL_LAYERS = {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             # connection info for redis provider
-            "hosts": ['redis://default:eKmKCLOhnGcoakGLxMstpvvjZRwHWfWN@redis.railway.internal:6379'],
+            "hosts": [os.getenv("REDIS_URL", "redis://redis:6379")],
         },
     },
 }
