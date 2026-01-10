@@ -8,3 +8,4 @@ django-cleanup
 django-htmx
 pillow
 psycopg[binary]
+whitenoise
