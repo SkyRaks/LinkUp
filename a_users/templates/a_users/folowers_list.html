@@ -1,0 +1,49 @@
+{% extends 'layouts/box.html' %}
+
+{% block content %}
+    <a class="btn btn-close mt-2 mx-2 float-end" href="{% url 'profile' %}" role="button"></a>
+    <br/>
+    <div class="pb-2">
+        {% for folower in thisFolowers %}
+            <div class="mx-auto col-6 m-2">
+                {% if mode == 'folowers' %}
+                    <div
+                        class="d-flex align-items-center justify-content-between rounded-3 p-2 btn btn-outline-dark"
+                        style="cursor: pointer;"
+                        onclick="window.location.href='{% url 'profile' username=folower.username %}'"
+                    >
+                        <div class="align-items-center text-decoration-none" aria-expanded="false">
+                            <img class="h-8 w-8 rounded-circle object-cover" src="{{ folower.profile.avatar }}" width="40" height="40"/>
+                            <span class="fw-bold">{{ folower.profile.name }}</span>
+                        </div>
+                        <a class="btn btn-warning btn-sm m-2"
+                           href="{% url 'chat' folower.username %}"
+                           role="button"
+                           onclick="event.stopPropagation();">
+                            chat
+                        </a>
+
+                    </div>
+                {% else %}
+                    <div
+                        class="d-flex align-items-center justify-content-between rounded-3 p-2 btn btn-outline-dark"
+                        style="cursor: pointer;"
+                        onclick="window.location.href='{% url 'profile' username=folower.user.username %}'"
+                    >
+                        <div class="align-items-center text-decoration-none" aria-expanded="false">
+                            <img class="h-8 w-8 rounded-circle object-cover" src="{{ folower.user.profile.avatar }}" width="40" height="40"/>
+                            <span class="fw-bold">{{ folower.user.profile.name }}</span>
+                        </div>
+                        <a class="btn btn-warning btn-sm m-2"
+                           href="{% url 'chat' folower.user.username %}"
+                           role="button"
+                           onclick="event.stopPropagation();">
+                            chat
+                        </a>
+
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

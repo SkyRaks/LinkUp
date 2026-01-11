@@ -2,56 +2,94 @@
 {% block content %}
          <a class="btn btn-close mt-2 mx-2 float-end" href="{% url 'home' %}" role="button"></a>
     <div class="max-w-lg mx-auto flex flex-col items-center pt-20 px-4">
-     <div class="text-center">
-     <img class="rounded-circle object-cover mt-2 mb-4" src="{{ profile.avatar }}" width="50" height="50"/>
-         <h2>{{ profile.name }}</h2>
-         <div class="text-gray-400 mb-2 -mt-3">{{ profile.username }}</div>
-         <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Posts</th>
-              <th scope="col">Folowers</th>
-              <th scope="col">Folowing</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                  {% if post_count %}
-                    {{ post_count }}
-                  {% else %}
-                    0
-                  {% endif %}
-              </td>
-              <td>
-                  {% if profile.folowers %}
-                    {{ profile.folowers.count }}
-                  {% else %}
-                    0
-                  {% endif %}
-              </td>
-              <td>
-                  {% if profile.user.subscribers %}
-                    {{ profile.user.subscribers.count }}
-                  {% else %}
-                    0
-                  {% endif %}
-              </td>
-            </tr>
-          </tbody>
-        </table>
+     <div class="">
+<!--         class="text-center"-->
+<!--     <img class="rounded-circle object-cover mt-2 mb-4" src="{{ profile.avatar }}" width="50" height="50"/>-->
+         <div class="d-flex justify-content-center">
+             <h2>{{ profile.name }}</h2>
+         </div>
+
+         <div class="d-flex justify-content-center align-items-center gap-5 text-center mt-3">
+             <div>
+                 <img class="rounded-circle object-cover mt-2 mb-4" src="{{ profile.avatar }}" width="60" height="60"/>
+             </div>
+             <div>
+                 <div class="fw-bold fs-5">
+                     {% if post_count %}
+                        {{ post_count }}
+                     {% else %}
+                        0
+                     {% endif %}
+                 </div>
+                 <div class="text-muted-small">Posts</div>
+             </div>
+
+             <a href="{% url 'folow-list' 'folowers' profile.user.username %}">
+                 <div class="text-dark">
+                     <div class="fw-bold fs-5">
+                         {% if profile.folowers %}
+                            {{ profile.folowers.count }}
+                          {% else %}
+                            0
+                          {% endif %}
+                     </div>
+                     <div class="text-muted-small">Followers</div>
+                 </div>
+             </a>
+
+             <a href="{% url 'folow-list' 'folowing' profile.user.username %}">
+                 <div class="text-dark">
+                     <div class="fw-bold fs-5">
+                         {% if profile.user.subscribers %}
+                            {{ profile.user.subscribers.count }}
+                          {% else %}
+                            0
+                          {% endif %}
+                     </div>
+                     <div class="text-muted-small">Following</div>
+                 </div>
+             </a>
+
+         </div>
+
          {% if profile.info %}
-         <div class="mt-8 hyphens-auto bg-warning">{{ profile.info }}</div>
+         <div class="mt-8 hyphens-auto justify-content-start">{{ profile.info }}</div>
          {% else %}
-         <div class="mt-8 hyphens-auto bg-warning">No Bio</div>
+<!--         <div class="mt-8 hyphens-auto">No Bio</div>-->
          {% endif %}
+<!--         <div class="d-flex justify-content-center">-->
          {% if profile.user == request.user %}
-         <a class="btn btn-primary m-2" href="{% url 'profile-edit' %}" role="button">Edit profile</a>
-         <a class="btn btn-primary m-2" href="{% url 'profile-settings' %}" role="button">Account settings</a>
+             <div class="d-flex justify-content-center">
+                 <a class="btn btn-primary m-2" href="{% url 'profile-edit' %}" role="button">Edit profile</a>
+                 <a class="btn btn-primary m-2" href="{% url 'profile-settings' %}" role="button">Account settings</a>
+             </div>
          {% else %}
-         <a class="btn btn-outline-primary m-2" href="{% url 'folow' profile.user.username %}" role="button">subscribe</a>
-         <a class="btn btn-primary m-2" href="{% url 'chat' profile.user.username %}" role="button">send message</a>
+             <div class="d-flex justify-content-center">
+                 <a class="btn btn-outline-primary m-2" href="{% url 'folow' profile.user.username %}" role="button">subscribe</a>
+                 <a class="btn btn-primary m-2" href="{% url 'chat' profile.user.username %}" role="button">send message</a>
+             </div>
          {% endif %}
+         <br/>
+
+         <div class="row row-cols-3 g-2 mb-2 pb-2">
+             {% if profile_posts %}
+                 {% for post in profile_posts %}
+                    <a href="{% url 'get-post' post.id %}">
+                        <div class="col">
+                            <div class="ratio ratio-1x1 square" style="cursor: pointer;">
+                                <img src="{{ post.post_image }}" class="img-fluid object-fit-cover rounded" alt="...">
+                            </div>
+                        </div>
+                    </a>
+                 {% endfor %}
+             {% else %}
+             <div class="col-12">
+                 <h4 style="text-align: center;">
+                     there is no posts yet
+                 </h4>
+             </div>
+             {% endif %}
+         </div>
      </div>
     </div>
 {% endblock %}

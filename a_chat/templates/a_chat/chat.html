@@ -1,18 +1,23 @@
 {% extends 'layouts/box.html' %}
 
 {% block content %}
-<h2 class="d-flex justify-content-center">
-    {{ other_user.profile.name }} and {{ request.user.profile.name }} chat
-</h2>
-<div class="bg-secondary border rounded">
-    <div id="chat_container" style="height: 400px; overflow-y: auto; padding: 10px;">
-        <ul id="chat_messages" ws-receive>
+<div class="d-flex justify-content-center align-items-center text-center mt-3">
+     <img class="rounded-circle object-cover mt-2 mb-4" src="{{ other_user.profile.avatar }}" width="60" height="60"/>
+    <h4 class="fw-bold">
+        @{{ other_user.profile.name }}
+    </h4>
+</div>
+
+<div class="bg-light border rounded-4">
+    <div id="chat_container" class="p-2" style="height: 400px; overflow-y: auto;">
+        <ul class="list-unstyled d-flex flex-column gap-2 mb-0" id="chat_messages" ws-receive>
             {% for message in chat_messages reversed %}
             {% include 'a_chat/chat_message.html' %}
             {% endfor %}
         </ul>
     </div>
-    <form id="chat_message_form" class="m-2"
+
+    <form id="chat_message_form" class="m-2 gap-2 border-top"
           hx-ext="ws"
           ws-connect="/ws/chatroom/{{ chatroom.id }}/"
           ws-send

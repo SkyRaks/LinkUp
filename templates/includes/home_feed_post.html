@@ -1,0 +1,44 @@
+<div class="card bg-light mb-4 mx-auto shadow-sm rounded-4 overflow-hidden" style="max-width: 35rem;">
+
+    <div class="card-header bg-light border-0 d-flex align-items-center gap-2">
+
+        <img src="{{ post.author.profile.avatar }}"
+             class="rounded-circle"
+             width="40" height="40"
+             style="object-fit: cover;"/>
+
+        <div class="flex-grow-1">
+            <a href="{% url 'profile' username=post.author.username %}"
+               class="text-dark fw-bold text-decoration-none">
+                @{{ post.author }}
+            </a>
+            <div class="text-muted small">
+                {{ post.created }}
+            </div>
+        </div>
+    </div>
+
+    <img src="{{ post.post_image }}"
+         class="w-100"
+         style="object-fit: cover;"/>
+
+    <div class="card-body pt-2">
+
+        <div class="d-flex align-items-center gap-2 mb-2"
+             id="like-section-{{ post.id }}"
+             hx-get="{% url 'like-post' post.id %}"
+             hx-trigger="click"
+             hx-target="#like-section-{{ post.id }}"
+             hx-swap="outerHTML"
+             style="cursor: pointer; width: fit-content;">
+
+            <img src="/static/like.png" width="28" height="28">
+            <span class="fw-semibold">{{ post.likes.count }}</span>
+        </div>
+
+        <p class="mb-1">
+            {{ post.caption }}
+        </p>
+
+    </div>
+</div>

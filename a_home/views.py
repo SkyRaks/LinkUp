@@ -71,4 +71,3 @@ def like_post(request, post_id):
     post.refresh_from_db()
     return render(request, 'partials/like_button_partial.html', {'post': post})
 
-
