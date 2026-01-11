@@ -1,3 +1,4 @@
+# from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from a_users.models import *
@@ -19,9 +20,30 @@ def home_view(request):
             cache.set(cache_key, post_feed, timeout=60)
         else: #this else statement is check if this thing is working
             print("cache hit!")
-        folowers = request.user.profile.folowers.all()
+        myFolowers = request.user.profile.folowers.all()
 
-        return render(request, 'home.html', {'post_feed': post_feed, 'folowers': folowers})
+        people = set() # people you may know set
+
+        if myFolowers.exists():
+
+            for myFolower in myFolowers: # looping through every folower
+                folowers = myFolower.profile.folowers.all() # getting my folowers folower
+
+                for person in folowers:
+                    if person == request.user or person in myFolowers or request.user in person.profile.folowers.all():
+                        continue
+                    people.add(person.profile)
+        else:
+            from django.contrib.auth import get_user_model
+            User = get_user_model()
+            otherPeople = User.objects.all()
+
+            for otherPerson in otherPeople:
+                people.add(otherPerson.profile)
+
+        print("people: ", people)
+
+        return render(request, 'home.html', {'post_feed': post_feed, 'folowers': myFolowers, 'people': people})
     else:
         return render(request, 'home.html')
 

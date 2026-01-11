@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container mt-4 mb-3">
-    <div class="row text-black gap-3">
+    <div class="row text-black gap-3 align-items-start">
 
         {% include 'includes/left_div.html' %}
 
@@ -28,8 +28,8 @@
                             {{ post.created }}
                             <img src="{{ post.post_image }}" class="card-img-top" width="200"/>
                             <div class="card-body">
-                                <p class="card-text">{{ post.caption }}</p>
-                                <div
+<!--                                <p class="card-text">{{ post.caption }}</p>-->
+                                <div class="mb-2"
                                     id="like-section-{{ post.id }}"
                                     hx-get="{% url 'like-post' post.id %}"
                                     hx-trigger="click"
@@ -41,6 +41,7 @@
                                     {{ post.likes.count }}
 
                                 </div>
+                                <p class="card-text">{{ post.caption }}</p>
                             </div>
                         </div>
                     {% endfor %}
@@ -53,6 +54,7 @@
         {% include 'includes/right_div.html' %}
 
     </div>
+
 </div>
 
 {% endblock %}

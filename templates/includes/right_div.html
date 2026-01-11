@@ -1,21 +1,28 @@
-<div class="col bg-secondary rounded-4">
-    <h1>People you may know</h1>
+<div class="col bg-secondary rounded-4 ">
+    <h1>Suggestions</h1>
     {% if user.is_authenticated %}
-        <table class="table">
-            <thead>
-            </thead>
-            <tbody>
-                {% for person in people %}
-                    <tr>
-                        <td>
-                            <a class="btn btn-dark" href="{% url 'profile' username=person.user.username %}" aria-expanded="false">
-                                <img class="h-8 w-8 rounded-circle object-cover" src="{{ person.avatar }}" width="30" height="30"/>
-                                {{ person.name }}
-                            </a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% for person in people %}
+            <div class="mx-auto m-2 ">
+
+                <div
+                    class="d-flex align-items-center justify-content-between rounded-3 p-2 btn btn-outline-dark"
+                    style="cursor: pointer;"
+                    onclick="window.location.href='{% url 'profile' username=person.user.username %}'"
+                >
+                    <div class="align-items-center text-decoration-none" aria-expanded="false">
+                        <img class="h-8 w-8 rounded-circle object-cover" src="{{ person.avatar }}" width="40" height="40"/>
+                        <span class="fw-bold">{{ person.name }}</span>
+                    </div>
+
+                    <a class="btn btn-primary btn-sm m-2"
+                       href="{% url 'folow' person.user.username %}"
+                       role="button"
+                       onclick="event.stopPropagation();">
+                        subscribe
+                    </a>
+                </div>
+
+            </div>
+        {% endfor %}
     {% endif %}
 </div>
