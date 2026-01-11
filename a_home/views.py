@@ -37,6 +37,7 @@ def home_view(request):
             from django.contrib.auth import get_user_model
             User = get_user_model()
             otherPeople = User.objects.all()
+            otherPeople = User.objects.exclude(id=request.user.id)
 
             for otherPerson in otherPeople:
                 people.add(otherPerson.profile)
