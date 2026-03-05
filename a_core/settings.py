@@ -24,9 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-m47k2y0-bx1@yd@)t6_i*qx3#8!y8=3&hxk2+#kr-^cxim%w7u'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1"]
+CSRF_TRUSTED_ORIGINS = [
+    "https://linkup-production-bbb2.up.railway.app",
+]
+
+ALLOWED_HOSTS = ["*", "localhost", "127.0.0.1", "linkup-production-bbb2.up.railway.app"]
 
 
 # Application definition
