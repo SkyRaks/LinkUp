@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -139,14 +140,15 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     # for production
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("POSTGRES_DB"),
-        'USER': os.getenv("POSTGRES_USER"),
-        'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
-        'HOST': os.getenv("POSTGRES_HOST", "db"),
-        'PORT': os.getenv("POSTGRES_PORT", "5432"),
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': os.getenv("POSTGRES_DB"),
+    #     'USER': os.getenv("POSTGRES_USER"),
+    #     'PASSWORD': os.getenv("POSTGRES_PASSWORD"),
+    #     'HOST': os.getenv("POSTGRES_HOST", "db"),
+    #     'PORT': os.getenv("POSTGRES_PORT", "5432"),
+    # }
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
 }
 
 
