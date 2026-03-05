@@ -12,6 +12,8 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
+RUN python manage.py collectstatic --noinput
+
 EXPOSE 8000
 
 CMD ["daphne", "-b", "0.0.0.0", "-p", "8000", "a_core.asgi:application"]
