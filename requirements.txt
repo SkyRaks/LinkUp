@@ -8,5 +8,6 @@ django-allauth
 django-cleanup
 django-htmx
 pillow
+dj-database-url
 psycopg[binary]
 whitenoise

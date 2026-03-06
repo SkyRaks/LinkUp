@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -147,14 +148,17 @@ DATABASES = {
     #     'HOST': os.getenv("POSTGRES_HOST", "db"),
     #     'PORT': os.getenv("POSTGRES_PORT", "5432"),
     # }
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("PGDATABASE"),
-        'USER': os.getenv("PGUSER"),
-        'PASSWORD': os.getenv("PGPASSWORD"),
-        'HOST': os.getenv("PGHOST"),
-        'PORT': os.getenv("PGPORT"),
-    }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': os.getenv("PGDATABASE"),
+    #     'USER': os.getenv("PGUSER"),
+    #     'PASSWORD': os.getenv("PGPASSWORD"),
+    #     'HOST': os.getenv("PGHOST"),
+    #     'PORT': os.getenv("PGPORT"),
+    # }
+    'default': dj_database_url.parse(
+        os.environ.get("DATABASE_URL");
+    )
 }
 
 
