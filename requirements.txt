@@ -3,6 +3,7 @@ channels
 daphne
 shortuuid
 channels-redis
+redis
 django-allauth
 django-cleanup
 django-htmx
