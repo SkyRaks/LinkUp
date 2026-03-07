@@ -13,16 +13,16 @@ from channels.auth import AuthMiddlewareStack
 from channels.routing import ProtocolTypeRouter, URLRouter
 from channels.security.websocket import AllowedHostsOriginValidator
 from django.core.asgi import get_asgi_application
-from whitenoise import WhiteNoise
-from pathlib import Path
+# from whitenoise import WhiteNoise
+# from pathlib import Path
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'a_core.settings')
 
 django_asgi_app = get_asgi_application()
 
-# Wrap Django ASGI app with WhiteNoise for media files
-BASE_DIR = Path(__file__).resolve().parent.parent
-django_asgi_app = WhiteNoise(django_asgi_app, root=str(BASE_DIR / "media"), prefix='media/')
+# # Wrap Django ASGI app with WhiteNoise for media files
+# BASE_DIR = Path(__file__).resolve().parent.parent
+# django_asgi_app = WhiteNoise(django_asgi_app, root=str(BASE_DIR / "media"), prefix='media/')
 
 from a_chat import routing
 
