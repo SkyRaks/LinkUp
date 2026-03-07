@@ -213,7 +213,9 @@ STORAGES = {
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-# MEDIA_ROOT = '/app/media'
+
+# add it to whitenoise (please work this time)
+WHITENOISE_ADD_HEADERS_FUNCTION = None
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
