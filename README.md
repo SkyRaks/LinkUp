@@ -3,6 +3,7 @@
 A real-time social media backend built with **Django**, **Django REST Framework**, and **Django Channels**, fully containerized using **Docker Compose** with PostgreSQL and Redis.
 
 This project is designed to be easy to run locally and ready for further scaling.
+You can visit hosted project: https://linkup-production-bbb2.up.railway.app/
 
 ---
 
