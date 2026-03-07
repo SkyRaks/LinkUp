@@ -12,9 +12,6 @@ RUN pip install -r requirements.txt
 
 COPY . /app
 
-RUN mkdir -p /app/media/posts_images
-RUN mkdir -p /app/media/avatars
-
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
